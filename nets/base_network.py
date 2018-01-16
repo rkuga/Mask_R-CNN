@@ -28,7 +28,7 @@ class BaseNetwork(object):
 
     def load_state(self,path,epoch):
         print "==> loading state %s epoch %s"%(path,epoch)
-        serializers.load_hdf5('/mnt/poplin/tmp/kuga/chainer_nets/states/%s/net_model_classifier_%s.h5'%(path,epoch), self.network)
+        serializers.load_hdf5('./states/%s/net_model_classifier_%s.h5'%(path,epoch), self.network)
         return int(epoch)
 
 
@@ -163,11 +163,11 @@ class BaseNetwork(object):
         else:
             raise Exception("unrecognized dataset")
 
-        self.out_model_dir ='/mnt/poplin/tmp/kuga/chainer_nets/states/'+self.my_state()+dataset
-        self.out_image_dir = '/mnt/poplin/tmp/kuga/chainer_nets/out_images/'+self.my_state()+dataset
+        self.out_model_dir ='./states/'+self.my_state()+dataset
+        self.out_image_dir = './out_images/'+self.my_state()+dataset
 
         if self.mode=='test' or self.mode=='generate':
-            self.out_image_dir = '/mnt/poplin/tmp/kuga/chainer_nets/test_images/'+self.my_state()+dataset+'/'+self.load[1]+'/'
+            self.out_image_dir = './test_images/'+self.my_state()+dataset+'/'+self.load[1]+'/'
 
         if not os.path.exists(self.out_model_dir):
             os.makedirs(self.out_model_dir)
